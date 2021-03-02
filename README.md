@@ -49,9 +49,7 @@ Vue.use(VueProTable)
   <vue-pro-table
     title="列表"
     :request="getList"         
-    :columns="columns"
-    :search="searchConfig"
-    :pagination="paginationConfig"           
+    :columns="columns"      
   >
     <template #operate="scope">
       <el-button size="mini" type="primary">编辑</el-button>
@@ -77,24 +75,6 @@ export default {
         tdSlot: 'operate', // 自定义单元格内容的插槽名称
       },
     ],
-    // 搜索配置
-    searchConfig: {
-      labelWidth: '90px',  // label文字长度
-      inputWidth: '360px', // 表单项长度
-      fields: [ // 搜索字段
-        {
-          type: 'text',
-          label: '名称',
-          name: 'nickName'
-        },
-      ]
-    },
-    // 分页配置  
-    paginationConfig: {
-      layout: 'total, prev, pager, next, sizes', // 分页组件显示哪些功能
-      pageSize: 5, // 每页条数
-      pageSizes: [5, 10, 20, 50], 
-    }
   },
   methods: {
     // 请求函数  
@@ -120,6 +100,12 @@ export default {
 ![列表页](https://raw.githubusercontent.com/huzhushan/pics/master/vue-pro-table/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20210226101705.png)
 
 ### 请求函数配置
+
+- request，请求列表数据的函数
+
+  >  组件加载的时候会自动执行request函数，并在加载过程中显示loading效果
+
+  函数接收参数：包含搜索表单的所有字段和分页的pageNum和pageSize
 
 ### 表格配置
 
@@ -147,6 +133,8 @@ export default {
 
 - search属性的配置，是一个对象
 
+  > 如果不想显示搜索表单，可以不配置search或者search设置为false
+
 | 参数       | 说明                                                         | 类型              | 可选值 | 默认值 |
 | ---------- | ------------------------------------------------------------ | ----------------- | ------ | ------ |
 | labelWidth | label文字长度                                                | string            | -      | -      |
@@ -171,6 +159,8 @@ export default {
 ### 分页配置
 
 - pagination属性的配置，是一个对象
+
+  > 如果不想显示分页，将pagination设置为false
 
 | 参数      | 说明                         | 类型          | 可选值                                  | 默认值                                   |
 | --------- | ---------------------------- | ------------- | --------------------------------------- | ---------------------------------------- |
@@ -200,7 +190,7 @@ export default {
 
   通过该事件得到已选择的行，参数是一个数组
 
-### 获取组件内部方法
+### 组件内部方法
 
 - refresh
 
@@ -486,4 +476,6 @@ export default {
 </script>
 ```
 
-![效果]()
+效果：
+
+![完整用法](https://raw.githubusercontent.com/huzhushan/pics/master/vue-pro-table/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20210302144535.png)
