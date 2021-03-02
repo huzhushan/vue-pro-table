@@ -4,7 +4,7 @@
  * @Author: huzhushan@126.com
  * @Date: 2021-02-04 13:24:16
  * @LastEditors: zsen.hu@uni-chain.com
- * @LastEditTime: 2021-02-26 09:33:47
+ * @LastEditTime: 2021-03-02 14:07:18
 -->
 <template>
   <div class="page-box">
@@ -311,7 +311,7 @@ export default {
       paginationConfig = {
         show: true,
         layout: layout || 'total, sizes, prev, pager, next, jumper',
-        pageSizes: pageSizes || [10, 20, 50, 100],
+        pageSizes: pageSizes || [10, 20, 30, 40, 50, 100],
         style: style || {},
       }
     }
