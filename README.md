@@ -105,7 +105,11 @@ export default {
 
   >  组件加载的时候会自动执行request函数，并在加载过程中显示loading效果
 
-  函数接收参数：包含搜索表单的所有字段和分页的pageNum和pageSize
+  - 函数接收参数：包含搜索表单的所有字段和分页的pageNum和pageSize
+  
+  - 函数必须返回一个对象，包含:
+    - data:  列表数据的数组
+    - total：总数，用于分页
 
 ### 表格配置
 
