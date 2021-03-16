@@ -5,7 +5,6 @@ function install (Vue, options = {}) {
   install.installed = true;
 
   Vue.component("vue-pro-table", Component);
-  Vue.prototype.$ELEMENT_PLUS = options
 }
 Component.install = install;
 
