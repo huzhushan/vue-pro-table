@@ -109,6 +109,8 @@ export default {
 
 ### 表格配置
 
+- border 表格是否有边框。布尔值，默认为 false
+
 - columns 属性的配置，是一个数组
 
 | 参数      | 说明                                                                                        | 类型                   | 可选值                 | 默认值 |
@@ -151,6 +153,7 @@ export default {
 | style        | 额外的样式                                                   | object               | -                                                            | -      |
 | defaultValue | 默认值                                                       | -                    | -                                                            |        |
 | options      | 当 type 是 select,radio,radio-button,checkbox,checkbox-button 时的枚举选项 | Array[{name, value}] | -                                                            | -      |
+| filterable   | 当 type 是 select 时，下拉框是否支持模糊搜索                 | boolean              | true, false                                                  | false  |
 | transform    | 搜索前对表单数据进行转换，比如表单数据是数组，但是搜索的时候需要传递字符串。它是一个函数，默认参数是字段的 value，需要返回转换后的结果 | function(value)      | -                                                            | -      |
 | trueNames    | 当 type 是 daterange,datetimerange 时，开始时间和结束时间是在一个数组里面，但是搜索时可能需要两个字段，这时就需要把开始时间和结束时间分别赋值给两个字段，这两个字段的名称就是通过 trueNames 配置，它是一个数组，例如：trueNames: ['startTime', 'endTime'] | Array[string]        |                                                              |        |
 | min          | 当 type 是 number 时的最小值                                 | number               | -                                                            | -      |
@@ -182,7 +185,7 @@ export default {
 
 - 自定义表格标题
 
-  提供一个具名插槽title，来自定义标题的内容
+  提供一个具名插槽 title，来自定义标题的内容
 
 - 工具栏
 
@@ -192,7 +195,7 @@ export default {
 
 - selectionChange
 
-  如果columns中配置了type为selection的列，可以通过该事件得到已选择的行，参数是一个数组
+  如果 columns 中配置了 type 为 selection 的列，可以通过该事件得到已选择的行，参数是一个数组
 
 ### 组件内部方法
 
@@ -213,59 +216,65 @@ export default {
     :pagination="paginationConfig"
     @selectionChange="handleSelectionChange"
   >
-      <!-- 工具栏 -->
-      <template #toolbar>
-        <el-button
-          type="primary"
-          icon="el-icon-plus"
-          @click="$router.push({name: 'userAdd'})"
-        >创建账号</el-button>
-        <el-button
-          type="danger"
-          icon="el-icon-refresh"
-          @click="$refs.pageBox.refresh()"
-        >刷新</el-button>
-      </template>
+    <!-- 工具栏 -->
+    <template #toolbar>
+      <el-button
+        type="primary"
+        icon="el-icon-plus"
+        @click="$router.push({ name: 'userAdd' })"
+        >创建账号</el-button
+      >
+      <el-button
+        type="danger"
+        icon="el-icon-refresh"
+        @click="$refs.pageBox.refresh()"
+        >刷新</el-button
+      >
+    </template>
 
-      <!-- 展开行 -->
-      <template #expand="{row}">
-        {{row.userEmail}}
-      </template>
+    <!-- 展开行 -->
+    <template #expand="{ row }">
+      {{ row.userEmail }}
+    </template>
 
-      <!-- 状态 -->
-      <template #status="{row}">
-        <el-tag :type="+row.status === 1 ? 'success' : 'info'">{{+row.status === 1 ? '启用' : '停用'}}</el-tag>
-      </template>
+    <!-- 状态 -->
+    <template #status="{ row }">
+      <el-tag :type="+row.status === 1 ? 'success' : 'info'">{{
+        +row.status === 1 ? "启用" : "停用"
+      }}</el-tag>
+    </template>
 
-      <!-- 表格操作栏 -->
-      <template #page-operate="{row}">
+    <!-- 表格操作栏 -->
+    <template #page-operate="{ row }">
+      <el-button
+        type="text"
+        @click="
+          $router.push({
+            name: 'userEdit',
+            params: {
+              id: row.id,
+            },
+          })
+        "
+        >编辑</el-button
+      >
 
-        <el-button
-          type="text"
-          @click="$router.push({name: 'userEdit', params: {
-                id: row.id
-              }})"
-        >编辑</el-button>
+      <el-button
+        v-if="+row.status === 1"
+        type="text"
+        @click="setUserStatus(row, 0)"
+        >停用</el-button
+      >
 
-        <el-button
-          v-if="+row.status === 1"
-          type="text"
-          @click="setUserStatus(row, 0)"
-        >停用</el-button>
+      <el-button v-else type="text" @click="setUserStatus(row, 1)"
+        >启用</el-button
+      >
+    </template>
 
-        <el-button
-          v-else
-          type="text"
-          @click="setUserStatus(row, 1)"
-        >启用</el-button>
-
-      </template>
-
-      <!-- 操作栏头部 -->
-      <template #th-operate>
-        <el-input />
-      </template>
-
+    <!-- 操作栏头部 -->
+    <template #th-operate>
+      <el-input />
+    </template>
   </vue-pro-table>
 </template>
 
