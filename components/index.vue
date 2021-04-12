@@ -29,6 +29,7 @@
           v-if="item.type === 'select'"
           v-model="searchModel[item.name]"
           :filterable="!!item.filterable"
+          :multiple="!!item.multiple"
           :placeholder="`请选择${item.label}`"
           :style="{ width: search.inputWidth, ...item.style }"
         >
