@@ -154,6 +154,7 @@ export default {
 | defaultValue | 默认值                                                       | -                    | -                                                            |        |
 | options      | 当 type 是 select,radio,radio-button,checkbox,checkbox-button 时的枚举选项 | Array[{name, value}] | -                                                            | -      |
 | filterable   | 当 type 是 select 时，下拉框是否支持模糊搜索                 | boolean              | true, false                                                  | false  |
+| multiple     | 当 type 是 select 时，下拉框是否支持多选                     | boolean              | true, false                                                  | false  |
 | transform    | 搜索前对表单数据进行转换，比如表单数据是数组，但是搜索的时候需要传递字符串。它是一个函数，默认参数是字段的 value，需要返回转换后的结果 | function(value)      | -                                                            | -      |
 | trueNames    | 当 type 是 daterange,datetimerange 时，开始时间和结束时间是在一个数组里面，但是搜索时可能需要两个字段，这时就需要把开始时间和结束时间分别赋值给两个字段，这两个字段的名称就是通过 trueNames 配置，它是一个数组，例如：trueNames: ['startTime', 'endTime'] | Array[string]        |                                                              |        |
 | min          | 当 type 是 number 时的最小值                                 | number               | -                                                            | -      |
