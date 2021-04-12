@@ -28,7 +28,7 @@
         <el-select
           v-if="item.type === 'select'"
           v-model="searchModel[item.name]"
-          filterable
+          :filterable="!!item.filterable"
           :placeholder="`请选择${item.label}`"
           :style="{ width: search.inputWidth, ...item.style }"
         >
@@ -175,6 +175,7 @@
         :row-key="rowKey"
         tooltip-effect="dark"
         stripe
+        :border="border"
         @selection-change="handleSelectionChange"
       >
         <el-table-column
@@ -265,6 +266,10 @@ export default {
     // 搜索表单配置，false表示不显示搜索表单
     search: {
       type: [Boolean, Object],
+      default: false,
+    },
+    border: {
+      type: Boolean,
       default: false,
     },
     // 表头配置
