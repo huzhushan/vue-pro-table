@@ -151,6 +151,7 @@
           v-else
           v-model="searchModel[item.name]"
           :placeholder="`请输入${item.label}`"
+          clearable
           :style="{ width: search.inputWidth, ...item.style }"
         ></el-input>
       </el-form-item>
