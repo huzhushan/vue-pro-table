@@ -30,6 +30,7 @@
           v-model="searchModel[item.name]"
           :filterable="!!item.filterable"
           :multiple="!!item.multiple"
+          clearable
           :placeholder="`请选择${item.label}`"
           :style="{ width: search.inputWidth, ...item.style }"
         >
@@ -101,6 +102,7 @@
           v-model="searchModel[item.name]"
           type="datetime"
           value-format="yyyy-MM-dd HH:mm:ss"
+          clearable
           :placeholder="`请选择${item.label}`"
           :style="{ width: search.inputWidth, ...item.style }"
         ></el-date-picker>
@@ -112,6 +114,7 @@
           range-separator="-"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
+          clearable
           @change="handleDateChange($event, item)"
           :style="{ width: search.inputWidth, ...item.style }"
         ></el-date-picker>
@@ -123,6 +126,7 @@
           range-separator="-"
           start-placeholder="开始时间"
           end-placeholder="结束时间"
+          clearable
           @change="handleDateChange($event, item)"
           :style="{ width: search.inputWidth, ...item.style }"
         ></el-date-picker>
@@ -139,6 +143,7 @@
           v-else-if="item.type === 'textarea'"
           type="textarea"
           v-model="searchModel[item.name]"
+          clearable
           :placeholder="`请输入${item.label}`"
           :style="{ width: search.inputWidth, ...item.style }"
         ></el-input>
