@@ -228,7 +228,7 @@ export default {
       <el-button
         type="danger"
         icon="el-icon-refresh"
-        @click="$refs.pageBox.refresh()"
+        @click="$refs.proTable.refresh()"
         >刷新</el-button
       >
     </template>
