@@ -3,8 +3,8 @@
  * @version: V1.0.0
  * @Author: huzhushan@126.com
  * @Date: 2021-02-04 13:24:16
- * @LastEditors: zsen.hu@uni-chain.com
- * @LastEditTime: 2021-03-02 14:07:18
+ * @LastEditors: huzhushan@126.com
+ * @LastEditTime: 2021-09-27 14:53:46
 -->
 <template>
   <div class="page-box">
@@ -25,8 +25,9 @@
         :label="item.label"
         :prop="item.name"
       >
+        <slot v-if="item.type === 'custom'" :name="item.slot" />
         <el-select
-          v-if="item.type === 'select'"
+          v-else-if="item.type === 'select'"
           v-model="searchModel[item.name]"
           :filterable="!!item.filterable"
           :multiple="!!item.multiple"
@@ -180,25 +181,21 @@
         v-loading="loading"
         :data="tableData"
         :row-key="rowKey"
+        :tree-props="tree.treeProps"
+        :lazy="tree.lazy"
+        :load="tree.load"
         tooltip-effect="dark"
         stripe
         :border="border"
         @selection-change="handleSelectionChange"
+        ref="table"
       >
         <el-table-column
           v-for="item in columns"
           :key="item.label"
-          :type="item.type"
-          :label="item.label"
-          :prop="item.prop"
-          :sortable="item.sortable"
-          :filters="item.filters"
           :filter-method="item.filters && filterHandler"
-          show-overflow-tooltip
-          :width="item.width"
-          :min-width="item.minWidth"
-          :align="item.align"
-          :fixed="item.fixed"
+          :show-overflow-tooltip="!item.wrap"
+          v-bind="item"
         >
           <template #header="scope" v-if="!!item.labelSlot">
             <slot :name="item.labelSlot" v-bind="scope"></slot>
@@ -468,4 +465,3 @@ export default {
   }
 }
 </style>
-
