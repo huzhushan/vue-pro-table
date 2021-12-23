@@ -4,7 +4,7 @@
  * @Author: huzhushan@126.com
  * @Date: 2021-02-04 13:24:16
  * @LastEditors: huzhushan@126.com
- * @LastEditTime: 2021-09-27 14:53:46
+ * @LastEditTime: 2021-12-23 19:02:35
 -->
 <template>
   <div class="page-box">
@@ -291,6 +291,10 @@ export default {
     // 分页配置，false表示不显示分页
     pagination: {
       type: [Boolean, Object],
+      default: () => ({}),
+    },
+    tree: {
+      type: Object,
       default: () => ({}),
     },
   },
